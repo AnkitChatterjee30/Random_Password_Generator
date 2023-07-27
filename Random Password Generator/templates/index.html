@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+   <meta charset="utf-8">
+   <title>Random Password Generator </title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+<style>
+   @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
+   * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+   }
+
+   html,
+   body {
+      display: grid;
+      height: 100%;
+      place-items: center;
+      background: #000;
+      text-align: center;
+   }
+
+   label {
+      color: #444;
+      margin-left: -50px;
+      position: absolute;
+   }
+
+   .container {
+      width: 450px;
+      background: #111;
+      border: 1px solid #444;
+      border-radius: 5px;
+      padding: 20px 25px;
+      margin-top: -100px;
+   }
+
+   .container .text {
+      color: #ccc;
+      font-weight: 600;
+      font-size: 26px;
+      line-height: 35px;
+   }
+
+   .container .input-data {
+      margin: 20px 5px 15px 5px;
+   }
+
+   .input-data .display {
+      height: 60px;
+      width: 100%;
+      display: flex;
+      position: relative;
+   }
+
+   .ques {
+      height: 100%;
+      width: 100%;
+      outline: none;
+      color: #eee;
+      border: 1px solid #333;
+      background: #222;
+      padding: 10px;
+      font-size: 17px;
+   }
+
+   .inputer {
+      height: 100%;
+      width: 100%;
+      outline: none;
+      color: #eee;
+      border: 1px solid #333;
+      background: #222;
+      padding: 10px;
+      font-size: 17px;
+      /* pointer-events: none; */
+      user-select: none;
+   }
+
+   .input-data .display .fas {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 25px;
+      color: grey;
+      z-index: 999;
+      display: none;
+      cursor: pointer;
+   }
+
+   .input-data .display .far {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 25px;
+      color: grey;
+      z-index: 999;
+      /* display: none; */
+      cursor: pointer;
+   }
+
+   input[type=submit] {
+      display: block;
+      height: 45px;
+      width: 100%;
+      margin-top: 15px;
+      border: 1px solid #444;
+      outline: none;
+      background: #1b1b1b;
+      color: #999999;
+      font-size: 17px;
+      font-weight: 500;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease;
+   }
+
+   .input[type=submit]:hover {
+      background: #222;
+   }
+
+   .input-data .labels {
+      margin-left: -270px;
+      font-size: 20px;
+   }
+
+   .display {
+      color: #888;
+   }
+
+   input[type=checkbox] {
+      accent-color: green;
+      position: absolute;
+      margin-left: 200px;
+   }
+
+   .password {
+      margin-left: 50px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #888;
+      background-color: transparent;
+      border: none;
+   }
+
+   .fas:hover .copied {
+      visibility: visible;
+
+   }
+
+   .display .copied {
+      visibility: hidden;
+      width: 100px;
+      height: 40px;
+      font-size: 14px;
+      color: white;
+      align-items: center;
+      text-align: center;
+      align-content: center;
+      padding: 12px;
+      background-color: black;
+      position: absolute;
+   }
+</style>
+
+<body>
+   <form class="container" action="/random" method="post">
+      <div class="text">
+         Random Password Generator <br>in HTML, CSS, JavaScript & Flask
+      </div>
+      <div class="input-data">
+         <div class="display">
+            <input type="text" class="password" value="{{password}}">
+            <!-- <input type="text" class="inputer"> -->
+            <!-- {{ password }} -->
+            <span class="far fa-copy" onclick="copy_this()"></span>
+            <span class="fas fa-copy" onclick="copy_this()"><span class="copied">Copied</span></span>
+         </div>
+         <br>
+         <input type="text" class="ques" placeholder="Enter the minimum characters :" name="ques" autocomplete="off"
+            required>
+         <br>
+         <br>
+         <div class="labels">
+            <label for="Lower case">Include Lower Case</label>
+            <input type="checkbox" name="loweropt" value="1" checked>
+            <br>
+            <label for="Upper case">Include Upper Case</label>
+            <input type="checkbox" name="upperopt" value="1">
+            <br>
+            <label for="Different Numbers">Include Numbers</label>
+            <input type="checkbox" name="numopt" value="1">
+            <br>
+            <label for="Different Symbols">Include Symbols</label>
+            <input type="checkbox" name="symopt" value="1">
+         </div>
+         <br>
+         <input type="submit" value="Generate Password">
+      </div>
+   </form>
+   <script>
+      var copyBtn = document.querySelector(".far");
+      var copyActive = document.querySelector(".fas");
+      function copy_this() {
+         var copied = document.querySelector(".password");
+         copyBtn.style.display = "none";
+         copyActive.style.display = "block";
+         copied.select();
+         document.execCommand("Copy");
+         copied.setSelectionRange(0, 99999);
+         navigator.clipboard.writeText(copied.value);
+         alert("Copied Text :" + copied.value);
+      }
+      // console.log(copied);
+   </script>
+</body>
+
+</html>
